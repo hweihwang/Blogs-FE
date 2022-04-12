@@ -1,4 +1,3 @@
-import {BlogModel} from "../Models/BlogModel";
 import {BlogRepositoryInterface} from "../Repositories/BlogRepositoryInterface";
 
 export class BlogService {
@@ -8,11 +7,7 @@ export class BlogService {
         this.blogRepository = blogRepository;
     }
 
-    public getAllBlogs(): Array<BlogModel> {
-        return this.blogRepository.getAll();
-    }
-
-    public async testReactQuery(): Promise<any> {
-        return await this.blogRepository.testReactQuery();
+    public async listBLogs(): Promise<any> {
+        return await this.blogRepository.getList();
     }
 }
