@@ -1,13 +1,14 @@
 import BlogItem from "./BlogItem";
 import {BlogModel} from "../Models/BlogModel";
+import {SimpleGrid} from "@chakra-ui/react";
 
 const BlogList = ({blogs}: { blogs: BlogModel[] }) => {
     return (
-        <div className={'container mx-auto grid grid-cols-4'}>
+        <SimpleGrid columns={2}>
             {blogs.map((blog: BlogModel) => (
                 <BlogItem blog={blog} key={blog.id}/>
             ))}
-        </div>
+        </SimpleGrid>
     );
 };
 

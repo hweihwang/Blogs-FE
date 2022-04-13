@@ -1,6 +1,16 @@
-import React from 'react'
-import 'windi.css'
+import {ChakraProvider, Container} from '@chakra-ui/react'
+import {QueryClient, QueryClientProvider} from "react-query";
 
-export default function MyApp({Component, pageProps}: { Component: any; pageProps: any }) {
-    return <Component {...pageProps} />
+const queryClient = new QueryClient()
+
+export default function App({Component, pageProps}: { Component: any; pageProps: any }) {
+    return (
+        <QueryClientProvider client={queryClient} contextSharing={true}>
+            <ChakraProvider>
+                <Container maxW={'container.md'}>
+                    <Component {...pageProps}/>
+                </Container>
+            </ChakraProvider>
+        </QueryClientProvider>
+    )
 }

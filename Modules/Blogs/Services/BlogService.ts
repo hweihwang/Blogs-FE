@@ -8,6 +8,10 @@ export class BlogService {
     }
 
     public async listBLogs(): Promise<any> {
-        return await this.blogRepository.getList();
+        return this.blogRepository.getList();
+    }
+
+    public async prefetchListBLogs(): Promise<any> {
+        return this.blogRepository.prefetchGetList();
     }
 }

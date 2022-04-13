@@ -1,17 +1,18 @@
 import React from "react";
 import {BlogModel} from "../Models/BlogModel";
+import {Box, Text} from "@chakra-ui/react";
 
 const BlogItem = ({blog}: { blog: BlogModel }) => {
     return (
-        <div className={'col-auto list-none'}>
-            <li>ID: {blog.id}</li>
-            <li>Title: {blog.title}</li>
-            <li>Description: {blog.description}</li>
-            <li>Content: {blog.content}</li>
-            <li>Created by: {blog.createdById}</li>
-            <li>Created at: {blog.createdAt}</li>
-            <li>Updated at{blog.updatedAt}</li>
-        </div>
+        <Box mt={10}>
+            <Text>ID: {blog.id}</Text>
+            <Text>Title: {blog.title}</Text>
+            <Text>Description: {blog.description}</Text>
+            <Text>Content: {blog.content}</Text>
+            <Text>Created by: {blog.createdById}</Text>
+            <Text>Created at: {blog.createdAt}</Text>
+            <Text>Updated at{blog.updatedAt}</Text>
+        </Box>
     )
 };
 
