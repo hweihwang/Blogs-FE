@@ -1,17 +1,24 @@
 import React from "react";
 import {BlogModel} from "../Models/BlogModel";
+import {Box, Heading, Text} from "@chakra-ui/react";
+import Link from "next/link";
 
 const BlogItem = ({blog}: { blog: BlogModel }) => {
     return (
-        <div className={'col-auto list-none'}>
-            <li>ID: {blog.id}</li>
-            <li>Title: {blog.title}</li>
-            <li>Description: {blog.description}</li>
-            <li>Content: {blog.content}</li>
-            <li>Created by: {blog.createdById}</li>
-            <li>Created at: {blog.createdAt}</li>
-            <li>Updated at{blog.updatedAt}</li>
-        </div>
+        <Link href={`/${blog.id}`} passHref={true}>
+            <Box mt={5} borderWidth={2} borderRadius={"lg"} overflow={"hidden"}>
+                <Box mt={5} ml={5} mr={5}>
+                    <Box mb={5}>
+                        <Heading as={"h2"} size={"lg"}>{blog.title}</Heading>
+                        <Text fontSize={"xx-small"}
+                              ml={0}>{blog.created_by_id ?? "Unknown"}&#9679;{blog.updated_at}</Text>
+                    </Box>
+                    <Text as={"h3"} mt={5} mb={5}>{blog.description}</Text>
+                    <Text fontSize={"sm"} mt={5} mb={5}>{blog.content}</Text>
+                    <Text fontSize={"sm"} mt={5}>{blog.created_by_id}</Text>
+                </Box>
+            </Box>
+        </Link>
     )
 };
 
