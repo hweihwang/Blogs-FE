@@ -2,7 +2,7 @@ import {BlogModel} from "../Models/BlogModel";
 import {SimpleGrid} from "@chakra-ui/react";
 import BlogItem from "./BlogItem";
 
-const BlogList = ({blogs}: { blogs: BlogModel[] }) => {
+export default ({blogs}: { blogs: BlogModel[] }) => {
     return (
         <SimpleGrid columns={2} spacing={5}>
             {blogs.map((blog: BlogModel) => (
@@ -11,5 +11,3 @@ const BlogList = ({blogs}: { blogs: BlogModel[] }) => {
         </SimpleGrid>
     );
 };
-
-export default BlogList;

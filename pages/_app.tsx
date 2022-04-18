@@ -3,7 +3,7 @@ import {ChakraProvider, Container} from "@chakra-ui/react";
 import {ReactQueryDevtools} from "react-query/devtools";
 import {Hydrate, QueryClient, QueryClientProvider} from "react-query";
 
-const App = ({Component, pageProps}) => {
+export default ({Component, pageProps}) => {
     const [queryClient] = useState(() => new QueryClient());
 
     return (
@@ -19,5 +19,3 @@ const App = ({Component, pageProps}) => {
         </QueryClientProvider>
     )
 }
-
-export default App;

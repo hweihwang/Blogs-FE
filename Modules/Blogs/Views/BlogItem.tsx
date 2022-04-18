@@ -3,7 +3,7 @@ import {BlogModel} from "../Models/BlogModel";
 import {Box, Heading, Text} from "@chakra-ui/react";
 import Link from "next/link";
 
-const BlogItem = ({blog}: { blog: BlogModel }) => {
+export default ({blog}: { blog: BlogModel }) => {
     return (
         <Link href={`/${blog.id}`} passHref={true}>
             <Box mt={5} borderWidth={2} borderRadius={"lg"} overflow={"hidden"}>
@@ -11,15 +11,12 @@ const BlogItem = ({blog}: { blog: BlogModel }) => {
                     <Box mb={5}>
                         <Heading as={"h2"} size={"lg"}>{blog.title}</Heading>
                         <Text fontSize={"xx-small"}
-                              ml={0}>{blog.created_by_id ?? "Unknown"}&#9679;{blog.updated_at}</Text>
+                              ml={0}>{blog.created_by_id ?? "Hweihwang"}&#9679;{blog.updated_at}</Text>
                     </Box>
                     <Text as={"h3"} mt={5} mb={5}>{blog.description}</Text>
                     <Text fontSize={"sm"} mt={5} mb={5}>{blog.content}</Text>
-                    <Text fontSize={"sm"} mt={5}>{blog.created_by_id}</Text>
                 </Box>
             </Box>
         </Link>
-    )
+    );
 };
-
-export default BlogItem;

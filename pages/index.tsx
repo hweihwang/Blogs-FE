@@ -1,12 +1,10 @@
 import BlogList from "../Modules/Blogs/Views/BlogList";
-import {BlogService} from "../Modules/Blogs/Services/BlogService";
-import {BlogRepository} from "../Modules/Blogs/Repositories/BlogRepository";
 import {dehydrate, QueryClient, useQuery} from "react-query";
-import {KyClient} from "../Modules/Shared/HttpClients/KyClient";
 import {BlogModel} from "../Modules/Blogs/Models/BlogModel";
 import {ListBlogResponseDTO} from "../Modules/Blogs/DTOs/BlogResponseDTO";
+import {ListBlogAction} from "../Modules/Blogs/Actions/ListBlogAction";
 
-const TodosIndexPage = () => {
+export default () => {
     const CACHE_KEY = ['blogs'];
 
     const {data} = useQuery(CACHE_KEY);
@@ -19,13 +17,9 @@ export const getServerSideProps = async () => {
 
     const queryClient = new QueryClient();
 
-    const httpClient = KyClient.getClient();
+    const listBlogAction = ListBlogAction.getAction();
 
-    const blogRepo = new BlogRepository(httpClient);
-
-    const blogService = new BlogService(blogRepo);
-
-    await queryClient.prefetchQuery(CACHE_KEY, blogService.listBlogs);
+    await queryClient.prefetchQuery(CACHE_KEY, listBlogAction.listBlogs);
 
     return {
         props: {
@@ -33,5 +27,3 @@ export const getServerSideProps = async () => {
         },
     }
 }
-
-export default TodosIndexPage;

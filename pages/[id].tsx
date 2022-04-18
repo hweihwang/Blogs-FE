@@ -1,12 +1,10 @@
 import {useRouter} from "next/router";
-import {BlogRepository} from "../Modules/Blogs/Repositories/BlogRepository";
-import {BlogService} from "../Modules/Blogs/Services/BlogService";
 import BlogItem from "../Modules/Blogs/Views/BlogItem";
 import {dehydrate, QueryClient, useQuery} from "react-query";
-import {KyClient} from "../Modules/Shared/HttpClients/KyClient";
 import {DetailBlogResponseDTO} from "../Modules/Blogs/DTOs/BlogResponseDTO";
+import {GetBlogAction} from "../Modules/Blogs/Actions/GetBlogAction";
 
-const TodoDetailPage = () => {
+export default () => {
     const router = useRouter();
 
     const {id} = router.query;
@@ -25,13 +23,9 @@ export const getServerSideProps = async (context: any) => {
 
     const queryClient = new QueryClient();
 
-    const httpClient = KyClient.getClient();
+    const getBlogAction = GetBlogAction.getAction();
 
-    const blogRepo = new BlogRepository(httpClient);
-
-    const blogService = new BlogService(blogRepo);
-
-    await queryClient.prefetchQuery(CACHE_KEY, () => blogService.getBlogById(id));
+    await queryClient.prefetchQuery(CACHE_KEY, () => getBlogAction.getBlogById(id));
 
     return {
         props: {
@@ -39,5 +33,3 @@ export const getServerSideProps = async (context: any) => {
         },
     }
 }
-
-export default TodoDetailPage;
