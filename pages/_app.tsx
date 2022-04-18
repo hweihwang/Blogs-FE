@@ -1,16 +1,23 @@
-import {ChakraProvider, Container} from '@chakra-ui/react'
-import {QueryClient, QueryClientProvider} from "react-query";
+import {useState} from 'react';
+import {ChakraProvider, Container} from "@chakra-ui/react";
+import {ReactQueryDevtools} from "react-query/devtools";
+import {Hydrate, QueryClient, QueryClientProvider} from "react-query";
 
-const queryClient = new QueryClient()
+const App = ({Component, pageProps}) => {
+    const [queryClient] = useState(() => new QueryClient());
 
-export default function App({Component, pageProps}: { Component: any; pageProps: any }) {
     return (
         <QueryClientProvider client={queryClient} contextSharing={true}>
-            <ChakraProvider>
-                <Container maxW={'container.md'}>
-                    <Component {...pageProps}/>
-                </Container>
-            </ChakraProvider>
+            <Hydrate state={pageProps.dehydratedState}>
+                <ChakraProvider>
+                    <Container maxW={'container.md'}>
+                        <Component {...pageProps} />
+                        <ReactQueryDevtools initialIsOpen={true}/>
+                    </Container>
+                </ChakraProvider>
+            </Hydrate>
         </QueryClientProvider>
     )
 }
+
+export default App;

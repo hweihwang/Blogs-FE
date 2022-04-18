@@ -1,5 +1,7 @@
-export interface BlogRepositoryInterface {
-    getList(): Promise<any>;
+import {DetailBlogResponseDTO, ListBlogResponseDTO} from "../DTOs/BlogResponseDTO";
 
-    prefetchGetList(): Promise<any>;
+export interface BlogRepositoryInterface {
+    getList(): Promise<ListBlogResponseDTO>;
+
+    getById(id: number): Promise<DetailBlogResponseDTO>;
 }

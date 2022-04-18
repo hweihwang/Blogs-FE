@@ -1,4 +1,5 @@
 import {BlogRepositoryInterface} from "../Repositories/BlogRepositoryInterface";
+import {DetailBlogResponseDTO, ListBlogResponseDTO} from "../DTOs/BlogResponseDTO";
 
 export class BlogService {
     private blogRepository: BlogRepositoryInterface;
@@ -7,11 +8,19 @@ export class BlogService {
         this.blogRepository = blogRepository;
     }
 
-    public async listBLogs(): Promise<any> {
-        return this.blogRepository.getList();
+    public listBlogs = async (): Promise<ListBlogResponseDTO> => {
+        try {
+            return this.blogRepository.getList();
+        } catch (e) {
+            throw e;
+        }
     }
 
-    public async prefetchListBLogs(): Promise<any> {
-        return this.blogRepository.prefetchGetList();
+    public async getBlogById(id: number): Promise<DetailBlogResponseDTO> {
+        try {
+            return this.blogRepository.getById(id);
+        } catch (e) {
+            throw e;
+        }
     }
 }
